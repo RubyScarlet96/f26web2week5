@@ -1,0 +1,150 @@
+main {
+    display: grid;
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: 80px 80px 25px;
+    gap: 10px;
+}
+
+.grid-cell {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.grid-cell-blue {
+    width: 80px;
+    height: 80px;
+    background-color: lightblue;
+}
+
+.grid-cell-green {
+    width: 80px;
+    height: 25px;
+    background-color: lightgreen;
+}
+
+.grid-cell-third-row-start {
+    grid-column: 2;
+}
+
+/* *******************************
+           TRANSFORMS
+********************************* */
+
+main div:nth-child(2) {
+    /* transform: translate(450px); */
+    transform: translate(25px, 25px);
+    /* translate : X is horiztonal; - vale move to the left, + value move to the right
+    Y is verticle; - value move up, + value move down
+    z is "3d"; - value move the object "away" (make it smaller), + values
+    move it "toward" (make it larger) */
+}
+
+main div:nth-child(3) {
+    transform: rotate(30deg);
+    /* 360 degrees in a circle-if you rotate 360 deg, the element will be back to its original position */
+}
+
+main div:nth-child(4) {
+    transform: scale(2, 0.5);
+    /* scale is a multiplier; 2 means 200% of the original size, 0.5 means 50% of the original size 
+    negative values will scale and flip it*/
+}
+
+main div:nth-child(5) {
+    transform: skew(-40deg);
+    /* skew is measured in degrees, and distorts the element
+    X is horizontal skew, Y is vertical skew */
+}
+
+main div:nth-child(7) {
+     /* dont put the transition on the hover state or it wont run when the user moves the cursor off the element */
+
+      transition-property: background-color;
+    /* transition-property tells the browser what to animate  */
+    transition-duration: 1s;
+    /* transition-duration tells the browser how long the animation should last */
+}
+
+main div:nth-child(7):hover{
+    /* transition allow you to animate (almost) any CSS property */
+    background-color: chocolate;
+}
+
+main div:nth-child(8) {
+    transition-property: transform;
+    transition-duration: 1500ms;
+    /* 1500ms = 1.5s */
+}
+
+main div:nth-child(9) {
+  /* you can use transition:all  to do any property that changes - transition is shorthand that includes propety,
+  duration, and any other transition value */
+  transition: all 2s;
+}
+
+main div:nth-child(9):hover {
+    font-size:24px;
+    color: blue;
+    border: 2px solid black;
+    transform: scale(1.5, 1.5);
+
+}
+
+/*  Key Frames (or CSS animation) has two parts - you have to creare the instruction for the animation
+using @keyframes, and then you call the animation by name on an element */
+
+@keyframes bounce {
+    /* inside @keyframes, you set the instructions for how the animation will run, or what should happen at each keyframe
+    .. if you don't enter a value for 0% or 100%, the animation will use whatever style the element already has */
+
+    7%{
+        transform: scaleY(0.9) translateY(0);
+        transform-origin: bottom; 
+        /* so the scale happens from the bottom not the center */
+    }
+
+    10%{
+        transform: scaleY(1);
+        transform-origin: bottom;
+        /* so the scale happens from the bottom */
+    }
+
+     50%{
+        transform: translateY(-50px);
+    }
+
+}
+
+main div:nth-child(10) {
+    /* call the animation by name, and tell it how to run */
+    animation-name: bounce;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+/* ***************************************
+          BUTTON animation
+***************************************** */
+
+.grid-cell-green {
+    text-align: center;
+    border-radius: 5px;
+    background-color: hsl(121, 52%, 57%)
+    /* Hue: your position on the colour wheel (reds, blues, etc.)
+    Saturation: how much "grey" is in the colour
+    Luminosity: how bright or vibrant the colour is */
+    border:2px solid hsl(121, 52%, 27%);
+    color: hsl(121, 52%, 37%);
+    padding:2px;
+
+    cursor:pointer;
+
+    /* transition so any change animates */
+    transition: all 800ms ease;
+}
+
+.grid-cell-green:hover, .grid-cell-green:focus, .grid-cell-green:active{
+    background-color: hsl(121, 52%, 77%);
+    border:2px solid hsl(121, 52%, 57%);
+    transform: scale(1.1);
+}
